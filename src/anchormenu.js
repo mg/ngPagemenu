@@ -1,6 +1,15 @@
 	mod.directive('anchormenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
-			scope.indent= scope.indent || 10;
+			scope.indent= scope.indent || "10";
+			var number= '';
+			var suffix= '';
+			for(var i= 0; i < scope.indent.length; i++) {
+				var c= scope.indent[i];
+				if(isNaN(c)) suffix += c;
+				else number += c;
+			}
+			if(suffix === '') suffix= 'px';
+			scope.indent= number;
 			if(scope.direction != 'right') {
 				scope.direction= 'left';
 			}
@@ -39,7 +48,7 @@
 
 			var items = state.items();
 			var markup = '';
-			for (var i = 0; i < items.length; i++) {
+			for (i = 0; i < items.length; i++) {
 				var item = itemConstruct(items[i]);
 				if (item.push) {
 					markup += '<ul class="nav">';
@@ -51,7 +60,7 @@
 					markup += '</li>';
 				}
 				markup += '<li anchormenuspy="' + item.link + '">';
-				markup += '<a style="padding-' + scope.direction + ': ' + item.indent + 'px" href="#' + item.link + '">';
+				markup += '<a style="padding-' + scope.direction + ': ' + item.indent + suffix + '" href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
 			}
