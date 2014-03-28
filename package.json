@@ -1,0 +1,38 @@
+{
+  "name": "ngAnchormenu",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mg/ngAnchormenu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mg/ngAnchormenu/issues"
+  },
+  "homepage": "https://github.com/mg/ngAnchormenu",
+  "author": "Magnús Örn Gylfason",
+  "license": "MIT",
+  "devDependencies": {
+    "karma-script-launcher": "latest",
+    "karma-jasmine": "latest",
+    "karma-phantomjs-launcher": "latest",
+    "karma-junit-reporter": "latest",
+    "karma": "latest",
+    "jshint-stylish": "latest",
+    "gulp": "latest",
+    "gulp-clean": "latest",
+    "gulp-notify": "latest",
+    "gulp-karma": "latest",
+    "gulp-jshint": "latest",
+    "gulp-strip-debug": "latest",
+    "gulp-concat": "latest",
+    "gulp-uglify": "latest",
+    "event-stream": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-header": "latest",
+    "gulp-wrap": "latest",
+    "run-sequence": "latest"
+  }
+}
