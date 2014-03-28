@@ -14,6 +14,9 @@
 				addSpy: function(spyObj) {
 					scope.spies[spyObj.id] = spyObj;
 				},
+				getSpy: function(id) {
+					return scope.spies[id];
+				},
 				items: function() {
 					return scope.spyElems;
 				}

@@ -14,10 +14,13 @@
 				scope.direction= 'left';
 			}
 			var stack = [];
+			var parentstack= [];
+			var lastitem;
 			var itemConstruct = function(data) {
 				var item = {
 					link: data.id,
-					text: data.innerText
+					text: data.innerText,
+					parent: ''
 				};
 				var level = data.tagName;
 				for (var i = 0; i < data.classList.length; i++) {
@@ -26,6 +29,7 @@
 				var stacksize = stack.length;
 				if (stacksize === 0) {
 					stack.push(level);
+					lastitem= item.link;
 				} else if (level !== stack[stacksize - 1]) {
 					for (var j = stacksize - 1; j >= 0; j--) {
 						if (level == stack[j]) {
@@ -35,12 +39,17 @@
 					if (j < 0) {
 						stack.push(level);
 						item.push = true;
+						parentstack.push(lastitem);
 					} else {
 						item.pop = stacksize - 1 - j;
 						while (stack.length > j + 1) {
 							stack.pop();
+							parentstack.pop();
 						}
 					}
+				}
+				if(parentstack.length > 0) {
+					item.parent= parentstack[parentstack.length-1];
 				}
 				item.indent = (stack.length - 1) * scope.indent;
 				return item;
@@ -59,7 +68,7 @@
 				} else if (i !== 0) {
 					markup += '</li>';
 				}
-				markup += '<li anchormenuspy="' + item.link + '">';
+				markup += '<li anchormenuspy="' + item.link + '" parent="' + item.parent + '">';
 				markup += '<a style="padding-' + scope.direction + ': ' + item.indent + suffix + '" href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
