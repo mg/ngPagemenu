@@ -44,11 +44,11 @@
 					for (var j = 0; j < item.pop; j++) {
 						markup += '</li></ul>';
 					}
-				} else if (i != 0) {
+				} else if (i !== 0) {
 					markup += '</li>';
 				}
 				markup += '<li mvp-anchormenu-spy="' + item.link + '">';
-				markup += '<a style="padding-left: ' + item.padding + 'px" href="#' + item.link + '">'
+				markup += '<a style="padding-left: ' + item.padding + 'px" href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
 			}
@@ -75,7 +75,7 @@
 			link: function(scope, element) {
 				state.setBuilder(function() {
 					postlinkfn(scope, element);
-				})
+				});
 			}
 		};
 	});
