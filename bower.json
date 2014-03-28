@@ -1,0 +1,7 @@
+{
+  "name": "ngAnchormenu",
+  "version": "0.1.0",
+  "devDependencies": {
+    "angular-mocks": "latest"
+  }
+}
