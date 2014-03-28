@@ -1,9 +1,9 @@
-	mod.directive('ngAnchormenuSpy', function($location, $anchorScroll) {
+	mod.directive('anchormenuspy', function($location, $anchorScroll) {
 		return {
 			restrict: "A",
 			link: function(scope, elem, attrs) {
 				state.addSpy({
-					id: attrs.mvpAnchormenuSpy,
+					id: attrs.anchormenuspy,
 					set: function() {
 						elem.addClass('active');
 					},

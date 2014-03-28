@@ -1,4 +1,4 @@
-	mod.directive('ngAnchoritems', function($window) {
+	mod.directive('anchoritems', function($window) {
 		var linkfn = function(scope, elem, attrs) {
 			if (!angular.isDefined(scope.selector)) {
 				console.log('mvp:AnchorItems: no selector defined');

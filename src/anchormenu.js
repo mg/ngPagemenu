@@ -1,4 +1,4 @@
-	mod.directive('ngAnchormenu', function($compile, $location, $anchorScroll) {
+	mod.directive('anchormenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
 			scope.padding |= 10;
 			var stack = [];
@@ -47,7 +47,7 @@
 				} else if (i !== 0) {
 					markup += '</li>';
 				}
-				markup += '<li mvp-anchormenu-spy="' + item.link + '">';
+				markup += '<li anchormenuspy="' + item.link + '">';
 				markup += '<a style="padding-left: ' + item.padding + 'px" href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
