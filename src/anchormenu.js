@@ -1,6 +1,6 @@
 	mod.directive('anchormenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
-			scope.padding |= 10;
+			scope.indent |= 10;
 			var stack = [];
 			var itemConstruct = function(data) {
 				var item = {
@@ -30,7 +30,7 @@
 						}
 					}
 				}
-				item.padding = (stack.length - 1) * scope.padding;
+				item.indent = (stack.length - 1) * scope.indent;
 				return item;
 			};
 
