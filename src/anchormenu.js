@@ -48,7 +48,7 @@
 					markup += '</li>';
 				}
 				markup += '<li anchormenuspy="' + item.link + '">';
-				markup += '<a style="padding-left: ' + item.padding + 'px" href="#' + item.link + '">';
+				markup += '<a style="padding-left: ' + item.indent + 'px" href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
 			}
@@ -69,7 +69,7 @@
 			restrict: 'E',
 			replace: true,
 			scope: {
-				padding: '@'
+				indent: '@'
 			},
 			template: '<ul class="nav anchormenu"></ul>',
 			link: function(scope, element) {
