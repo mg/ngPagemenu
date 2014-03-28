@@ -1,6 +1,9 @@
 	mod.directive('anchormenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
 			scope.indent= scope.indent || 10;
+			if(scope.direction != 'right') {
+				scope.direction= 'left';
+			}
 			var stack = [];
 			var itemConstruct = function(data) {
 				var item = {
@@ -48,7 +51,7 @@
 					markup += '</li>';
 				}
 				markup += '<li anchormenuspy="' + item.link + '">';
-				markup += '<a style="padding-left: ' + item.indent + 'px" href="#' + item.link + '">';
+				markup += '<a style="padding-' + scope.direction + ': ' + item.indent + 'px" href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
 			}
@@ -69,7 +72,8 @@
 			restrict: 'E',
 			replace: true,
 			scope: {
-				indent: '@'
+				indent: '@',
+				direction: '@'
 			},
 			template: '<ul class="nav anchormenu"></ul>',
 			link: function(scope, element) {
