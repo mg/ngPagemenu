@@ -2,12 +2,12 @@
 		return {
 			restrict: "A",
 			link: function(scope, elem, attrs) {
-				state.addSpy({
+				getState().addSpy({
 					id: attrs.pagemenuspy,
 					parent: attrs.parent,
 					set: function() {
 						elem.addClass('active');
-						var parent= state.getSpy(this.parent);
+						var parent= getState().getSpy(this.parent);
 						if(parent) parent.set();
 					},
 					clear: function() {

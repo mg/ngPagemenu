@@ -7,7 +7,7 @@
 			scope.spyElems = elem[0].getElementsByClassName(scope.selector);
 
 			scope.spies = {};
-			state.store({
+			getState().store({
 				topMargin: function() {
 					return scope.topmargin |  0;
 				},

@@ -5,4 +5,5 @@
 
 <%= contents %>
 
+	function getState() { return state; }
 })(angular);

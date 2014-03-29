@@ -41,7 +41,7 @@
 				return item;
 			};
 
-			var items = state.items();
+			var items = getState().items();
 			var markup = '';
 			for (var i = 0; i < items.length; i++) {
 				var item = itemConstruct(items[i]);
@@ -67,7 +67,7 @@
 				$location.hash(hash);
 				$anchorScroll();
 				setTimeout(function() {
-					window.scrollTo(window.pageXOffset, window.pageYOffset - state.topMargin());
+					window.scrollTo(window.pageXOffset, window.pageYOffset - getState().topMargin());
 				}, 0);
 			});
 		};
@@ -77,7 +77,7 @@
 			replace: true,
 			template: '<ul class="nav pagemenu"></ul>',
 			link: function(scope, element) {
-				state.setBuilder(function() {
+				getState().setBuilder(function() {
 					postlinkfn(scope, element);
 				});
 			}
