@@ -1,8 +1,8 @@
 module.exports = {
 	files: [
 		'state.js',
-		'anchormenu.js',
+		'pagemenu.js',
 		'spy.js',
-		'anchoritems.js'
+		'pageitems.js'
 	]
 };

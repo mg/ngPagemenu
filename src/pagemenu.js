@@ -1,4 +1,4 @@
-	mod.directive('anchormenu', function($compile, $location, $anchorScroll) {
+	mod.directive('pagemenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
 			var stack = [];
 			var parentstack= [];
@@ -54,7 +54,7 @@
 				} else if (i !== 0) {
 					markup += '</li>';
 				}
-				markup += '<li anchormenuspy="' + item.link + '" parent="' + item.parent + '">';
+				markup += '<li pagemenuspy="' + item.link + '" parent="' + item.parent + '">';
 				markup += '<a href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
@@ -75,7 +75,7 @@
 		return {
 			restrict: 'E',
 			replace: true,
-			template: '<ul class="nav anchormenu"></ul>',
+			template: '<ul class="nav pagemenu"></ul>',
 			link: function(scope, element) {
 				state.setBuilder(function() {
 					postlinkfn(scope, element);

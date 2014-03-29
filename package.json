@@ -1,17 +1,17 @@
 {
-  "name": "ngAnchormenu",
+  "name": "ngPagemenu",
   "version": "0.1.0",
   "scripts": {
     "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mg/ngAnchormenu.git"
+    "url": "https://github.com/mg/ngPagemenu.git"
   },
   "bugs": {
-    "url": "https://github.com/mg/ngAnchormenu/issues"
+    "url": "https://github.com/mg/ngPagemenu/issues"
   },
-  "homepage": "https://github.com/mg/ngAnchormenu",
+  "homepage": "https://github.com/mg/ngPagemenu",
   "author": "Magnús Örn Gylfason",
   "license": "MIT",
   "devDependencies": {

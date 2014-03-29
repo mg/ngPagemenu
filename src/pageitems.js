@@ -1,7 +1,7 @@
-	mod.directive('anchoritems', function($window) {
+	mod.directive('pageitems', function($window) {
 		var linkfn = function(scope, elem, attrs) {
 			if (!angular.isDefined(scope.selector)) {
-				console.log('mvp:AnchorItems: no selector defined');
+				console.log('Pageitems: no selector defined');
 				return;
 			}
 			scope.spyElems = elem[0].getElementsByClassName(scope.selector);
