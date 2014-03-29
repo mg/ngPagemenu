@@ -150,7 +150,10 @@
 		<script src="../bower_components/angular/angular.js" type="text/javascript"></script>
 		<script src="../dist/ngAnchormenu.debug.js" type="text/javascript"></script>
 		<script type="text/javascript">
-			angular.module( 'app', ['ngAnchormenu']);
+			angular.module( 'app', ['ngAnchormenu'])
+				.config(function($locationProvider) {
+					$locationProvider.html5Mode(true); // to remove slash from hash
+				});
 		</script>
 	</body>
 </html>
