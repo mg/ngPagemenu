@@ -15,6 +15,8 @@
 		run: function() {
 			if (this.builder && this.state) {
 				this.builder();
+				this.builder= null;
+				this.state= null;
 			}
 		}
 	};
