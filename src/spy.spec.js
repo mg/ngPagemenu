@@ -9,7 +9,7 @@ describe('Testing pagemenuspy directive', function () {
     };
     var linkingFn = $compile('<span pagemenuspy="ItemID" parent="ParentID"></span>');
     scope = $rootScope;
-    return linkingFn(scope);
+    element = linkingFn(scope);
   };
 
   it('called state.addSpy', inject(function ($compile, $rootScope) {
@@ -67,7 +67,7 @@ describe('Testing pagemenuspy directive', function () {
         };
       }
     };
-    var element= compile($compile, $rootScope);
+    compile($compile, $rootScope);
     expect(element.hasClass('active')).toBe(false);
     stateMock.set();
     expect(element.hasClass('active')).toBe(true);
@@ -81,7 +81,7 @@ describe('Testing pagemenuspy directive', function () {
         clone(o,this);
       }
     };
-    var element= compile($compile, $rootScope);
+    compile($compile, $rootScope);
     element.addClass('active');
     stateMock.clear();
     expect(element.hasClass('active')).toBe(false);
