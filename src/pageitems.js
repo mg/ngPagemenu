@@ -1,4 +1,4 @@
-	mod.directive('pageitems', function($window) {
+	mod.directive('pageitems', function($window, $document) {
 		var linkfn = function(scope, elem, attrs) {
 			if (!angular.isDefined(scope.selector)) {
 				console.log('Pageitems: no selector defined');
@@ -56,7 +56,7 @@
 					}
 				}
 
-				if (($window.innerHeight + $window.scrollY) >= document.body.offsetHeight) {
+				if (($window.innerHeight + $window.scrollY) >= $document[0].body.offsetHeight) {
 					highlightSpy = spies[spyElems[spyElems.length-1].id];
 				}
 
