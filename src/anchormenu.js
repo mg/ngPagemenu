@@ -1,20 +1,5 @@
 	mod.directive('anchormenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
-			scope.baseindent= scope.baseindent || "20";
-			scope.baseindent= +scope.baseindent;
-			scope.indent= scope.indent || "10";
-			var number= '';
-			var suffix= '';
-			for(var i= 0; i < scope.indent.length; i++) {
-				var c= scope.indent[i];
-				if(isNaN(c)) suffix += c;
-				else number += c;
-			}
-			if(suffix === '') suffix= 'px';
-			scope.indent= +number;
-			if(scope.direction != 'right') {
-				scope.direction= 'left';
-			}
 			var stack = [];
 			var parentstack= [];
 			var lastitem;
@@ -52,14 +37,13 @@
 				if(parentstack.length > 0) {
 					item.parent= parentstack[parentstack.length-1];
 				}
-				item.indent = scope.baseindent + (stack.length - 1) * scope.indent;
 				lastitem= item.link;
 				return item;
 			};
 
 			var items = state.items();
 			var markup = '';
-			for (i = 0; i < items.length; i++) {
+			for (var i = 0; i < items.length; i++) {
 				var item = itemConstruct(items[i]);
 				if (item.push) {
 					markup += '<ul class="nav">';
@@ -71,7 +55,7 @@
 					markup += '</li>';
 				}
 				markup += '<li anchormenuspy="' + item.link + '" parent="' + item.parent + '">';
-				markup += '<a style="padding-' + scope.direction + ': ' + item.indent + suffix + '" href="#' + item.link + '">';
+				markup += '<a href="#' + item.link + '">';
 				markup += item.text;
 				markup += '</a>';
 			}
@@ -91,11 +75,6 @@
 		return {
 			restrict: 'E',
 			replace: true,
-			scope: {
-				baseindent: '@',
-				indent: '@',
-				direction: '@'
-			},
 			template: '<ul class="nav anchormenu"></ul>',
 			link: function(scope, element) {
 				state.setBuilder(function() {
