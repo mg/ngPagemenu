@@ -25,7 +25,8 @@
 			var spyElems = scope.spyElems;
 			var topmargin = scope.topmargin | 0;
 			scope.spies[scope.spyElems[0].id].set();
-			angular.element($window).on('scroll', function() {
+			var w = angular.element($window);
+			w.on('scroll', function() {
 				var highlightSpy = null;
 				var spies = scope.spies;
 
@@ -55,8 +56,8 @@
 					}
 				}
 
-				if (highlightSpy === null) {
-					highlightSpy = spies[spies.length - 1];
+				if (($window.innerHeight + $window.scrollY) >= document.body.offsetHeight) {
+					highlightSpy = spies[spyElems[spyElems.length-1].id];
 				}
 
 				highlightSpy.set();
