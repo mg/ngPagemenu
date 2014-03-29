@@ -1,5 +1,7 @@
 	mod.directive('anchormenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
+			scope.baseindent= scope.baseindent || "20";
+			scope.baseindent= +scope.baseindent;
 			scope.indent= scope.indent || "10";
 			var number= '';
 			var suffix= '';
@@ -9,7 +11,7 @@
 				else number += c;
 			}
 			if(suffix === '') suffix= 'px';
-			scope.indent= number;
+			scope.indent= +number;
 			if(scope.direction != 'right') {
 				scope.direction= 'left';
 			}
@@ -29,7 +31,6 @@
 				var stacksize = stack.length;
 				if (stacksize === 0) {
 					stack.push(level);
-					lastitem= item.link;
 				} else if (level !== stack[stacksize - 1]) {
 					for (var j = stacksize - 1; j >= 0; j--) {
 						if (level == stack[j]) {
@@ -51,7 +52,8 @@
 				if(parentstack.length > 0) {
 					item.parent= parentstack[parentstack.length-1];
 				}
-				item.indent = (stack.length - 1) * scope.indent;
+				item.indent = scope.baseindent + (stack.length - 1) * scope.indent;
+				lastitem= item.link;
 				return item;
 			};
 
@@ -90,6 +92,7 @@
 			restrict: 'E',
 			replace: true,
 			scope: {
+				baseindent: '@',
 				indent: '@',
 				direction: '@'
 			},
