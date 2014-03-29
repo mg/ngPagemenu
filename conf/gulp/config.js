@@ -12,6 +12,7 @@ module.exports = {
 
 	local: {
 		root: 'src',
+		local: 'src/**/*',
 	  scripts: inject('src/', buildorder).concat([
 	  	'!src/**/*.spec.js',
 	  	'!src/**/*.mock.js'
@@ -24,8 +25,8 @@ module.exports = {
 	  	]
 	  	.concat(inject('src/', buildorder))
 	  	.concat([
-	  		'src/**/*.spec.js',
-	  		'src/**/*.mock.js'
+	  		'src/**/*.mock.js',
+	  		'src/**/*.spec.js'
 	  	]),
   },
 

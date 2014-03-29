@@ -33,6 +33,7 @@
     "gulp-load-plugins": "latest",
     "gulp-header": "latest",
     "gulp-wrap": "latest",
+    "gulp-watch": "latest",
     "run-sequence": "latest"
   }
 }
