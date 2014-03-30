@@ -36,33 +36,44 @@ Licence: MIT
 	};
 	mod.directive('pagemenu', function($compile, $location, $anchorScroll) {
 		var postlinkfn = function(scope, element) {
-			var stack = [];
-			var parentstack= [];
-			var lastitem;
+			var stack = []; // stack to build tree
+			var parentstack= []; // current ancestry
+			var lastitem; // used to build the tree
+
 			var itemConstruct = function(data) {
+				// parse basic info from the dom item
 				var item = {
 					link: data.id,
 					text: data.innerText,
 					parent: ''
 				};
+
+				// build type identifier
 				var level = data.tagName;
 				for (var i = 0; i < data.classList.length; i++) {
 					level += ',' + data.classList[i];
 				}
+
+				// here be dragons
 				var stacksize = stack.length;
 				if (stacksize === 0) {
+					// we are at the top level and will stay there
 					stack.push(level);
 				} else if (level !== stack[stacksize - 1]) {
+					// traverse the ancestry, looking for a match
 					for (var j = stacksize - 1; j >= 0; j--) {
 						if (level == stack[j]) {
-							break;
+							break; // found an ancestor
 						}
 					}
 					if (j < 0) {
+						// this is a new submenu item, lets push the stack
 						stack.push(level);
 						item.push = true;
 						parentstack.push(lastitem);
 					} else {
+						// we are either a sibling or higher up the tree,
+						// lets pop the stack if needed
 						item.pop = stacksize - 1 - j;
 						while (stack.length > j + 1) {
 							stack.pop();
@@ -70,26 +81,36 @@ Licence: MIT
 						}
 					}
 				}
+
+				// if we have a parent, lets record it
 				if(parentstack.length > 0) {
 					item.parent= parentstack[parentstack.length-1];
 				}
+
+				// for next iteration
 				lastitem= item.link;
 				return item;
 			};
 
+			// dom items to build menu from
 			var items = getState().items();
 			var markup = '';
 			for (var i = 0; i < items.length; i++) {
 				var item = itemConstruct(items[i]);
 				if (item.push) {
+					// new submenu
 					markup += '<ul class="nav">';
 				} else if (item.pop) {
+					// closing submenu, maybe more than one
 					for (var j = 0; j < item.pop; j++) {
 						markup += '</li></ul>';
 					}
 				} else if (i !== 0) {
+					// sibling
 					markup += '</li>';
 				}
+
+				// basic markup
 				markup += '<li pagemenuspy="' + item.link + '" parent="' + item.parent + '">';
 				markup += '<a href="#' + item.link + '">';
 				markup += item.text;
@@ -99,12 +120,19 @@ Licence: MIT
 			element.append($compile(markup)(scope));
 
 			element.on('click', function(e) {
+				// menu item clicked, lets scroll to the associated dom item
 				var hash = e.target.hash.substring(1);
 				$location.hash(hash);
 				$anchorScroll();
-				setTimeout(function() {
-					window.scrollTo(window.pageXOffset, window.pageYOffset - getState().topMargin());
-				}, 0);
+				if(getState().topMargin() !== 0 ) {
+					setTimeout(function() {
+						// scroll the extra top margin
+						window.scrollTo(
+							window.pageXOffset,
+							window.pageYOffset - getState().topMargin()
+						);
+					}, 0);
+				}
 			});
 		};
 
@@ -113,6 +141,13 @@ Licence: MIT
 			replace: true,
 			template: '<ul class="nav pagemenu"></ul>',
 			link: function(scope, element) {
+				// We can't create menu if pageitems element hasn't traversed the dom.
+				// For now we simply hook hour linking function. If pageitems has already
+				// traversed the dom it will called right away, otherwise it will be called
+				// once the dom has been traversed. This means we can include the menu in
+				// the dom either before the items are queried, or after. There is no
+				// positional dependency between the pageitems directive and the
+				// pagemenu directive.
 				getState().setBuilder(function() {
 					postlinkfn(scope, element);
 				});
@@ -124,14 +159,16 @@ Licence: MIT
 			restrict: "A",
 			link: function(scope, elem, attrs) {
 				getState().addSpy({
-					id: attrs.pagemenuspy,
-					parent: attrs.parent,
+					id: attrs.pagemenuspy, // my id
+					parent: attrs.parent, // my parent spy
 					set: function() {
+						// higlight me and and parent if I have a parent
 						elem.addClass('active');
 						var parent= getState().getSpy(this.parent);
 						if(parent) parent.set();
 					},
 					clear: function() {
+						// clear my highight
 						elem.removeClass('active');
 					}
 				});
@@ -144,23 +181,27 @@ Licence: MIT
 				void 0;
 				return;
 			}
-			scope.spyElems = elem[0].getElementsByClassName(scope.selector);
-			scope.spies = {};
+			scope.spyElems = elem[0].getElementsByClassName(scope.selector); // dom items
+			scope.spies = {}; // menu items
+
+			// this function will be called once dom is parsed and menu is created
 			getState().onRun= function() {
-				scope.spies[scope.spyElems[0].id].set();
+				scope.spies[scope.spyElems[0].id].set(); // highlight first element
 			};
+
+			// Store my state that pagemenu will use to build the menu
 			getState().store({
 				topMargin: function() {
-					return scope.topmargin |  0;
+					return scope.topmargin |  0; // so that pagemenu can correctly offset scrolling
 				},
 				addSpy: function(spyObj) {
-					scope.spies[spyObj.id] = spyObj;
+					scope.spies[spyObj.id] = spyObj; // each item in menu calls this function to register itself with pageitems
 				},
 				getSpy: function(id) {
-					return scope.spies[id];
+					return scope.spies[id]; // return the spy associated with id
 				},
 				items: function() {
-					return scope.spyElems;
+					return scope.spyElems; // return a list of dom items to be used to build menu
 				}
 			});
 
@@ -197,6 +238,7 @@ Licence: MIT
 					}
 				}
 
+				// if we are at the bottom of the page, higlight last spy
 				if (($window.innerHeight + $window.scrollY) >= $document[0].body.offsetHeight) {
 					highlightSpy = spies[spyElems[spyElems.length-1].id];
 				}

@@ -12,6 +12,19 @@ The idea is to generate the menu dynamicly from the DOM according to certain sel
 ###How does it work?
 The module provides two directives, *pageitems* attribute and *<pagemenu>* tag. The *pageitems* tag will parse the included HTML and query for items with a certain class. The menu will then be generated in the DOM where you put the *<pagemenu>* tag from that list of items. 
 
+###How do I use it?
+Install with bower:
+
+    bower install ngPagemenu --save
+
+Add a <script> to your index.html:
+
+    <script src="/bower_components/ngPaemenu/dist/ngPagemenu.js"></script>
+
+And add ngPagemeu as a dependency for your app:
+
+    angular.module('myApp', ['ngPagemenu']);
+
 ###Any customization?
 The *pageitems* attribute accepts two parameters, *selector* and *topmargin*. The *selector* specifies the class used to query the DOM for menu items. The *topmargin* specifies a scrolling offset that is useful if you contain a static header and don't want your items to be under that static header when you click on the menu to scroll to them.
 
@@ -55,3 +68,26 @@ Magnús Örn Gylfason, a web programmer working in the banking industry in Icela
 
 ###Is it done?
 Yes! Obviously if you find some devilish bug, create an issue or contact me. But as far as features goes, this is finished.
+
+###Licence
+The MIT License (MIT)
+
+Copyright (c) 2014 Magnús Örn Gylfason
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

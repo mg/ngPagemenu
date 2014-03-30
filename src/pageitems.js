@@ -4,23 +4,27 @@
 				console.log('Pageitems: no selector defined');
 				return;
 			}
-			scope.spyElems = elem[0].getElementsByClassName(scope.selector);
-			scope.spies = {};
+			scope.spyElems = elem[0].getElementsByClassName(scope.selector); // dom items
+			scope.spies = {}; // menu items
+
+			// this function will be called once dom is parsed and menu is created
 			getState().onRun= function() {
-				scope.spies[scope.spyElems[0].id].set();
+				scope.spies[scope.spyElems[0].id].set(); // highlight first element
 			};
+
+			// Store my state that pagemenu will use to build the menu
 			getState().store({
 				topMargin: function() {
-					return scope.topmargin |  0;
+					return scope.topmargin |  0; // so that pagemenu can correctly offset scrolling
 				},
 				addSpy: function(spyObj) {
-					scope.spies[spyObj.id] = spyObj;
+					scope.spies[spyObj.id] = spyObj; // each item in menu calls this function to register itself with pageitems
 				},
 				getSpy: function(id) {
-					return scope.spies[id];
+					return scope.spies[id]; // return the spy associated with id
 				},
 				items: function() {
-					return scope.spyElems;
+					return scope.spyElems; // return a list of dom items to be used to build menu
 				}
 			});
 
@@ -57,6 +61,7 @@
 					}
 				}
 
+				// if we are at the bottom of the page, higlight last spy
 				if (($window.innerHeight + $window.scrollY) >= $document[0].body.offsetHeight) {
 					highlightSpy = spies[spyElems[spyElems.length-1].id];
 				}
