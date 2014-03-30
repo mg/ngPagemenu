@@ -1,6 +1,7 @@
 {
   "name": "ngPagemenu",
   "version": "1.0.0",
+  "description": "An opinionated ScrollSpy implementation for AngularJS",
   "scripts": {
     "test": "gulp test"
   },

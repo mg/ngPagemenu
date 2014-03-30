@@ -1,6 +1,7 @@
 {
   "name": "ngPagemenu",
   "version": "1.0.0",
+  "description": "An opinionated ScrollSpy implementation for AngularJS",
   "dependencies": {
     "angular": "~1.2.0"
   },
