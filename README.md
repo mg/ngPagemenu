@@ -16,7 +16,7 @@ The module provides two directives, *pageitems* attribute and *<pagemenu>* tag. 
 The *pageitems* attribute accepts two parameters, *selector* and *topmargin*. The *selector* specifies the class used to query the DOM for menu items. The *topmargin* specifies a scrolling offset that is useful if you contain a static header and don't want your items to be under that static header when you click on the menu to scroll to them.
 
 ##The pageitems thing generates a list but the pagemenu can be a tree. How does that work?
-The list is mapped to a tree using the following heuristic. A type is generated for the item based on the tag name and classes. The type is compared to the previous item's type. If they are equal this new item is a sibling of the previous item. Otherwise we traverse a stack of parents. If a matching type is found the stack is popped to that level and the new item becomes a sibling at that level. If no parent is found the stack is pushed and the new item becomes a child of the last item. Simples!
+The list is mapped to a tree using the following heuristic. A type is generated for the item based on the tag name and classes. The type is compared to the previous item's type. If they are equal this new item is a sibling of the previous item. Otherwise we traverse a stack of parents. If a matching type is found the stack is popped to that level and the new item becomes a sibling at that level. If no parent is found the stack is pushed and the new item becomes a child of the last item.
 
 For a more visual demonstration, consider the following list of items:
 
@@ -37,8 +37,6 @@ This will be mapped to the following tree:
             Item 5
     Item 6
         Item 7
-
-Obviously.
 
 ##Dependencies?
 Only AngularJS. This does not in any way depend on jQuery, Bootstrap's js or css, or AngularUI.
