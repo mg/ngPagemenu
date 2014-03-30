@@ -5,8 +5,10 @@
 				return;
 			}
 			scope.spyElems = elem[0].getElementsByClassName(scope.selector);
-
 			scope.spies = {};
+			getState().onRun= function() {
+				scope.spies[scope.spyElems[0].id].set();
+			};
 			getState().store({
 				topMargin: function() {
 					return scope.topmargin |  0;
@@ -24,7 +26,6 @@
 
 			var spyElems = scope.spyElems;
 			var topmargin = scope.topmargin | 0;
-			scope.spies[scope.spyElems[0].id].set();
 			var w = angular.element($window);
 			w.on('scroll', function() {
 				var highlightSpy = null;

@@ -1,4 +1,5 @@
 	var state = {
+		onRun: null,
 		state: null,
 		store: function(s) {
 			for (var k in s) {
@@ -17,6 +18,10 @@
 				this.builder();
 				this.builder= null;
 				this.state= null;
+				if(this.onRun) {
+					this.onRun();
+					this.onRun= null;
+				}
 			}
 		}
 	};
