@@ -17,7 +17,7 @@ Install with bower:
 
     bower install ngPagemenu --save
 
-Add a <script> to your index.html:
+Add a &lt;script&gt; to your index.html:
 
     <script src="/bower_components/ngPaemenu/dist/ngPagemenu.js"></script>
 
