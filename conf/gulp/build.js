@@ -27,6 +27,7 @@ gulp.task('build-min', function() {
 		.pipe(stripdebug())
 		.pipe(plugins.concat(conf.dist.name + '.min.js'))
 		.pipe(plugins.wrap({ src: conf.build + 'wrapper.js'}, {namespace: conf.dist.name}))
+		.pipe(plugins.ngmin())
 		.pipe(plugins.uglify())
 		.pipe(plugins.header('/*\n' + fs.readFileSync(conf.licence, "utf8") + '\n*/\n'))
 		.pipe(gulp.dest(conf.dist.root));

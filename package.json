@@ -35,6 +35,7 @@
     "gulp-header": "latest",
     "gulp-wrap": "latest",
     "gulp-watch": "latest",
-    "run-sequence": "latest"
+    "run-sequence": "latest",
+    "gulp-ngmin": "latest"
   }
 }
