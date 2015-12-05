@@ -1,5 +1,7 @@
 #ngPagemenu
 
+##ATTENTION: This is AbandonWare. The author (me) has stopped using AngularJS in both private life and work life. If you are interested in maintain this and develop it further, contact me and I will link to your repo.
+
 ###What is it?
 A feature focused implementation of Bootstrap's [ScrollSpy](http://getbootstrap.com/javascript/#scrollspy) functionality.
 
